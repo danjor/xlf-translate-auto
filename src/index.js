@@ -97,6 +97,13 @@ const argv = require('yargs')
         describe: 'Add approved="true" XML attribute to trans-unit with translation with state="final"',
         type: 'boolean',
         default: false,
+    })
+    .option('nw', {
+        alias: 'normalizeWhitespace',
+        demand: false,
+        describe: 'Normalize whitespace when generating the output XML (remove leading and trailing whitespace, double spaces, and newlines)',
+        type: 'boolean',
+        default: true,
     }).argv;
 
 // start a timer so that we can
@@ -117,7 +124,8 @@ readFileAsync(path.resolve(argv.in))
             argv.proxy,
             argv.autoProxy,
             argv.clearState,
-            argv.addApprovedToStateFinal
+            argv.addApprovedToStateFinal,
+            argv.normalizeWhitespace
         );
     })
 

@@ -28,7 +28,8 @@ async function translate(
     proxy,
     autoProxy,
     clearState,
-    addApprovedToStateFinal
+    addApprovedToStateFinal,
+    normalizeWhitespace
 ) {
     const schema = {
         input,
@@ -41,6 +42,7 @@ async function translate(
         autoProxy,
         clearState,
         addApprovedToStateFinal,
+        normalizeWhitespace,
     };
     const xlfStruct = convert.xml2js(input);
     const limiter = new Bottleneck({
@@ -97,7 +99,7 @@ async function translate(
     let normalizedTarget = xmlNormalize({
         in: xml,
         trim: false,
-        normalizeWhitespace: true,
+        normalizeWhitespace: schema.normalizeWhitespace,
         // no sorting for 'stableAppendNew' as this is the default merge behaviour:
         sortPath: undefined,
         removePath: undefined,
