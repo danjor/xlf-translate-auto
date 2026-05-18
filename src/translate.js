@@ -86,7 +86,7 @@ async function translate(
         // https://github.com/nashwaan/xml-js/issues/26#issuecomment-355620249
         attributeValueFn: function (value) {
             return value
-                .replace(/&/g, '&amp;')
+                .replace(/&(?!(?:amp|lt|gt|quot|apos|#\d+|#x[\da-fA-F]+);)/g, '&amp;')
                 .replace(/</g, '&lt;')
                 .replace(/>/g, '&gt;')
                 .replace(/"/g, '&quot;')
